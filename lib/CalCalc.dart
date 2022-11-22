@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'homePage.dart';
+import 'package:flutter/material.dart';
 class CalCalc extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -62,7 +63,7 @@ class Calculator extends State<CalCalc> {
 
 
 
-import 'package:flutter/material.dart';
+
  class calcalcPage extends StatelessWidget{
  @override
    Widget build(BuildContext context) {
