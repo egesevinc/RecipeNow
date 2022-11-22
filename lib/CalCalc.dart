@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:se380_project/MainPage.dart';
 import 'homePage.dart';
-class MainPage extends StatefulWidget{
+class CalCalc extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
-    return _MainState();
+    return Calculator();
   }
 
 }
 
-class _MainState extends State<MainPage> {
-  var _currentIndex = 0;
+class Calculator extends State<CalCalc> {
+  var _currentIndex = 1;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-          title: Text("RecipeNow"),
+        title: Text("RecipeNow"),
       ),
-      backgroundColor: Color(0xFFF0F0F0),
+      backgroundColor: Colors.green,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
@@ -41,7 +40,42 @@ class _MainState extends State<MainPage> {
     );
   }
   getBodyWidget(){
-    return (_currentIndex==0) ? HomePage():Container();
+    return (_currentIndex==0) ? CalCalc():Container();
 
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import 'package:flutter/material.dart';
+ class calcalcPage extends StatelessWidget{
+ @override
+   Widget build(BuildContext context) {
+   return Scaffold(
+     backgroundColor: Colors.white54,
+     body: Center(
+       child: (Image.asset('assets/images/calculator.png')
+       )
+     )
+     );
+
+
+ }
+
+
+ }
