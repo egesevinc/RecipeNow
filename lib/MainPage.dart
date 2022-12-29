@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:se380_project/models/CalCalc.dart';
 import 'package:se380_project/MainPage.dart';
+import 'package:se380_project/screens/Calculator.dart';
+import 'package:se380_project/screens/search_screen.dart';
 import 'homePage.dart';
+
 class MainPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -15,7 +19,7 @@ class _MainState extends State<MainPage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
           title: Text("RecipeNow"),
       ),
       backgroundColor: Color(0xFFF0F0F0),
@@ -30,8 +34,8 @@ class _MainState extends State<MainPage> {
         },
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.calculate), label: "Calorie calculator"),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+          BottomNavigationBarItem(icon: Icon(Icons.calculate), label: "Calculator"),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
         ],
       ),
@@ -41,7 +45,11 @@ class _MainState extends State<MainPage> {
     );
   }
   getBodyWidget(){
-    return (_currentIndex==0) ? HomePage():Container();
+    if(_currentIndex==0) {return HomePage(); }
+    if(_currentIndex==2) {return CalculatorScreen(); }
+    if(_currentIndex==1) {return SearchScreen(); }
+    if(_currentIndex==3) {return HomePage(); }
 
   }
+
 }
