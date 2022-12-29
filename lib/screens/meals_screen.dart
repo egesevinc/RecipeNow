@@ -40,14 +40,14 @@ class _MealsScreenState extends State<MealsScreen> {
               Text(
                 'Calories: ${widget.mealPlan.calories.toString()} cal',
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 15,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
                 'Protein: ${widget.mealPlan.protein.toString()} g',
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 15,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -60,14 +60,14 @@ class _MealsScreenState extends State<MealsScreen> {
               Text(
                 'Fat: ${widget.mealPlan.fat.toString()} g',
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 15,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
                 'Carb: ${widget.mealPlan.carbs.toString()} cal',
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 15,
                   fontWeight: FontWeight.w600,
                 ),
               ),

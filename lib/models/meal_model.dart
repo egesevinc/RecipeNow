@@ -14,7 +14,7 @@ factory Meal.fromMap(Map<String, dynamic> map) {
   return Meal(
     id: map['id'],
     title: map['title'],
-    imageUrl: 'https://spoonacular.com/recipeImages/' + map['image'],
+    imageUrl: 'https://spoonacular.com/recipeImages/' + map['sourceUrl'],
   );
 
 }

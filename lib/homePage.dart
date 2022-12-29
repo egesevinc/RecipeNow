@@ -1,29 +1,35 @@
 import 'package:flutter/material.dart';
-
+import 'package:se380_project/screens/Calculator.dart';
+import 'package:se380_project/screens/search_screen.dart';
+import 'main.dart';
 class HomePage extends StatelessWidget{
 
   var services = [
     "Search",
-    "Edit1",
-    "Edit2",
-    "Edit3",
-    "Edit4",
-    "Edit4",
-    "Edit4",
-    "Edit4"
+    "Calorie Calculator",
+    "Search by Ingredient",
+    "Diet",
+    "Meal Suggestion",
+    "Favorites",
   ];
 
   var images = [
-    "assets/images/adornment.png",
-    "assets/images/adornment.png",
-    "assets/images/adornment.png",
-    "assets/images/adornment.png",
-    "assets/images/adornment.png",
-    "assets/images/adornment.png",
-    "assets/images/adornment.png",
-    "assets/images/adornment.png",
-    "assets/images/adornment.png",
+    "assets/images/searchImage.png",
+    "assets/images/calculator.png",
+    "assets/images/ingredient.jpg",
+    "assets/images/diet.png",
+    "assets/images/suggestion.png",
+    "assets/images/fav.jpg",
 
+
+  ];
+  var pages = [
+    SearchScreen(),
+    LoginWidget(onClickedSignup: () => null),
+    CalculatorScreen(),
+    SearchScreen(),
+    SearchScreen(),
+    SearchScreen(),
 
   ];
   @override
@@ -40,12 +46,19 @@ class HomePage extends StatelessWidget{
               child: Column(
                 children: <Widget>[
                   SizedBox(
-                    height: 20,
+                    height: 30,
                   ),
                   Image.asset(images[index] , height: 50,width: 50,),
                   Padding(
-                      padding: EdgeInsets.all(20), child:Text(services[index], style: TextStyle(fontSize: 16,fontFamily:"Montserrat",color:Colors.black,height:1.2,fontWeight: FontWeight.w600),textAlign: TextAlign.center,)
+                    padding: EdgeInsets.all(8),
+                    child: ElevatedButton(
+                      onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> pages[index])),
+                      child: Text(services[index], style: TextStyle(fontSize: 16,fontFamily:"Montserrat",color:Colors.black,height:1.2,fontWeight: FontWeight.w600),
+                          textAlign: TextAlign.center,
+                    ),
+                  ),
                   )
+
                 ],
               ),
             );

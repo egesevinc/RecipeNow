@@ -144,9 +144,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 //FlatButton where onPressed() triggers a function called _searchMealPlan
                 ElevatedButton  (
                     style: ElevatedButton.styleFrom(
-                      fixedSize: const Size.fromWidth(100),
+                      fixedSize: const Size.fromWidth(200),
                       backgroundColor: Theme.of(context).primaryColor,
-                      padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),

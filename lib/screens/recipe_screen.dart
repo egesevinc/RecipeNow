@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:se380_project/models/recipe_model.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
 class RecipeScreen extends StatefulWidget {
   //This stateful widget page takes in String mealType and Recipe recipe
   final String mealType;

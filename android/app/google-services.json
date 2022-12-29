@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "584915172712",
+    "project_id": "recipenow-72913",
+    "storage_bucket": "recipenow-72913.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:584915172712:android:6029629abb3eec586baadd",
+        "android_client_info": {
+          "package_name": "com.example.se380_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "584915172712-um4b1ngfd0av2sgiqfar7uo0hoq2rkma.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSnhSu_jvMBbzKrOIs1jcomUtknSyfdDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "584915172712-um4b1ngfd0av2sgiqfar7uo0hoq2rkma.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "584915172712-l85je0a3o31205gvk5is0srtq649mrtl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.se380Project"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
