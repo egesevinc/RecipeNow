@@ -1,9 +1,10 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:se380_project/models/meal_plan_model.dart';
 import 'package:se380_project/models/recipe_model.dart';
-
+import 'package:se380_project/models/recipe_search_result.dart';
 class APIService {
   APIService._instantiate();
 
@@ -37,7 +38,35 @@ class APIService {
       throw err.toString();
     }
   }
+  //  int number=10,int offset=0
+  Future<List<Recipetest>> searchRecipesByIngredient({required String ingredient,int number=10,int offset=0}) async {
+    Map<String, String> parameters = {
+      'ingredients': ingredient,
+      'number': number.toString(),
+      'apiKey': API_KEY,
+    };
+    Uri uri = Uri.https(
+        _baseUrl,
+        'recipes/findByIngredients',
+        parameters,
+    );
 
+    Map<String, String> headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+
+    //debugger();
+
+    try {
+      var response = await http.get(uri,headers: headers);
+      List<dynamic> data = json.decode(response.body);
+      RecipeSearchResult searchResult = RecipeSearchResult.fromMap(data);
+      return searchResult.recipes;
+    }catch (err) {
+      throw err.toString();
+    }
+
+  }
   Future<Recipe> fetchRecipe(String id) async {
     Map<String, String> parameters = {
       'includeNutrition': 'false',
