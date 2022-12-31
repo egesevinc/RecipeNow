@@ -9,7 +9,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:email_validator/email_validator.dart';
+import 'utils.dart';
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key,required this.onClickedSignup}) : super(key: key);
   final VoidCallback onClickedSignup;
@@ -31,51 +32,57 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
     padding: EdgeInsets.all(16),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(height: 40),
-        TextField(
-          controller: emailController,
-          cursorColor: Colors.white,
-          textInputAction: TextInputAction.next,
-          decoration: InputDecoration(labelText: "Email")
-          ),
-          SizedBox(height: 4),
-          TextField(
-            controller: passwordController,
-            textInputAction: TextInputAction.done,
-            decoration: InputDecoration(labelText: "Password"),
-            obscureText: true,
-            ),
-            SizedBox(height: 20),
-            ElevatedButton.icon(style:ElevatedButton.styleFrom(minimumSize: Size.fromHeight(50),),
-              icon: Icon(Icons.lock_open, size: 32 ),
-              label: Text(
-                'Sign In',
-                style: TextStyle(fontSize: 24),
+    child: Center(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 100),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset("assets/images/ingredient.jpg"),
+            SizedBox(height: 40),
+            TextField(
+              controller: emailController,
+              cursorColor: Colors.white,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(labelText: "Email")
               ),
-              onPressed: signIn,
-            ),
-            SizedBox(height: 24,),
-            RichText(
-            text: TextSpan(
-              recognizer: TapGestureRecognizer()
-                ..onTap= widget.onClickedSignup,
-              style: TextStyle(color: Colors.white,fontSize: 24),
-              text: 'No account?',
-              children: [
-                TextSpan(
-                  text: 'Sign Up',
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: Theme.of(context).colorScheme.secondary,
-                  )
+              SizedBox(height: 4),
+              TextField(
+                controller: passwordController,
+                textInputAction: TextInputAction.done,
+                decoration: InputDecoration(labelText: "Password"),
+                obscureText: true,
+                ),
+                SizedBox(height: 20),
+                ElevatedButton.icon(style:ElevatedButton.styleFrom(minimumSize: Size.fromHeight(50),),
+                  icon: Icon(Icons.lock_open, size: 32 ),
+                  label: Text(
+                    'Log In',
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  onPressed: signIn,
+                ),
+                SizedBox(height: 24,),
+                RichText(
+                text: TextSpan(
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = widget.onClickedSignup,
+                  style: TextStyle(color: Colors.indigo,fontSize: 24),
+                  text: 'No account? ',
+                  children: [
+                    TextSpan(
+                      text: 'Sign Up',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: Theme.of(context).colorScheme.secondary,
+                      )
+                    )
+                  ]
                 )
-              ]
-            )
-            )
-      ],
+                )
+          ],
+        ),
+      ),
     ),
   );
 Future signIn() async{
@@ -87,6 +94,7 @@ Future signIn() async{
     );
   } on FirebaseAuthException catch (e) {
     print(e);
+    Utils.showSnackBar(e.message);
   }
   navigatorKey.currentState!.popUntil((route) => route.isFirst);
 }
@@ -104,6 +112,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: Utils.messengerKey,
       navigatorKey: navigatorKey,
       title: 'SE 380 Project',
       theme: ThemeData(
@@ -166,7 +175,10 @@ class HomePageLogin extends StatelessWidget {
               ),
               icon: Icon(Icons.arrow_back, size: 32),
               label: Text('Sign Out', style: TextStyle(fontSize: 24),),
-              onPressed: () => FirebaseAuth.instance.signOut(),
+              onPressed: () async {FirebaseAuth.instance.signOut();
+              Navigator.of(context).push(MaterialPageRoute(builder:
+              (context) => AuthPage()));
+              }
             ),
 
           ],
@@ -200,6 +212,7 @@ class SignUpWidget extends StatefulWidget {
 }
 
 class _SignUpWidgetState extends State<SignUpWidget> {
+  final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -213,55 +226,75 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
     padding: EdgeInsets.all(16),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(height: 40),
-        TextField(
-            controller: emailController,
-            cursorColor: Colors.white,
-            textInputAction: TextInputAction.next,
-            decoration: InputDecoration(labelText: "Email")
-        ),
-        SizedBox(height: 4),
-        TextField(
-          controller: passwordController,
-          textInputAction: TextInputAction.done,
-          decoration: InputDecoration(labelText: "Password"),
-          obscureText: true,
-        ),
-        SizedBox(height: 20),
-        ElevatedButton.icon(style:ElevatedButton.styleFrom(minimumSize: Size.fromHeight(50),),
-          icon: Icon(Icons.lock_open, size: 32 ),
-          label: Text(
-            'Sign In',
-            style: TextStyle(fontSize: 24),
-          ),
-          onPressed: signUp,
-        ),
-        SizedBox(height: 24,),
-        RichText(
-            text: TextSpan(
-                recognizer: TapGestureRecognizer()
-                  ..onTap= widget.onClickedSignIn,
-                style: TextStyle(color: Colors.white,fontSize: 24),
-                text: 'Alread have an account?',
-                children: [
-                  TextSpan(
-                      text: 'Log In',
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: Theme.of(context).colorScheme.secondary,
-                      )
+    child: Form(
+      key: formKey,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 100),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset("assets/images/ingredient.jpg"),
+              SizedBox(height: 40),
+              TextFormField(
+                  controller: emailController,
+                  cursorColor: Colors.white,
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(labelText: "Email"),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (email) => email != null && !EmailValidator.validate(email)
+                ? 'Enter a valid Email'
+                : null,
+              ),
+              SizedBox(height: 4),
+              TextFormField(
+                controller: passwordController,
+                textInputAction: TextInputAction.done,
+                decoration: InputDecoration(labelText: "Password"),
+                obscureText: true,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) => value != null && value.length < 6
+                    ? 'Enter minimum 6 characters'
+                    : null,
+              ),
+              SizedBox(height: 20),
+              ElevatedButton.icon(style:ElevatedButton.styleFrom(minimumSize: Size.fromHeight(50),),
+                icon: Icon(Icons.lock_open, size: 32 ),
+                label: Text(
+                  'Sign Up',
+                  style: TextStyle(fontSize: 24),
+                ),
+                onPressed: signUp,
+              ),
+              SizedBox(height: 24,),
+              RichText(
+                  text: TextSpan(
+                      recognizer: TapGestureRecognizer()
+                        ..onTap= widget.onClickedSignIn,
+                      style: TextStyle(color: Colors.indigo,fontSize: 24),
+                      text: 'Already have an account? ',
+                      children: [
+                        TextSpan(
+                            text: 'Log In',
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: Theme.of(context).colorScheme.secondary,
+                            )
+                        )
+                      ]
                   )
-                ]
-            )
-        )
-      ],
+              )
+            ],
+          ),
+        ),
+      ),
     ),
   );
 
   Future signUp() async {
+    final isValid = formKey.currentState!.validate();
+    if(isValid) return;
+
     showDialog(context: context,barrierDismissible: false, builder: (context) => Center(child: CircularProgressIndicator(),));
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -270,6 +303,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
       );
     } on FirebaseAuthException catch (e) {
       print(e);
+      Utils.showSnackBar(e.message);
     }
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }

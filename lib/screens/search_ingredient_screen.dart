@@ -54,9 +54,12 @@ class _SearchIngredientState extends State<SearchIngredient> {
                     itemCount: snapshot.data?.length,
                     itemBuilder: (context, index) {
                       Recipetest recipe = snapshot.data![index];
-                      return ListTile(
-                        title: Text(recipe.title),
-                        leading: Image.network(recipe.imageUrl),
+                      return Container(
+                        padding: EdgeInsets.all(3),
+                        child: ListTile(
+                          title: Text(recipe.title),
+                          leading: Image.network(recipe.imageUrl),
+                        ),
                       );
                     },
                   );

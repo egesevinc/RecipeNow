@@ -12,17 +12,17 @@ class HomePage extends StatelessWidget{
     "Diet",
     "Meal Suggestion",
     "Favorites",
+    "Log Out"
   ];
 
   var images = [
     "assets/images/searchImage.png",
     "assets/images/calculator.png",
-    "assets/images/ingredient.jpg",
+    "assets/images/ingred.png",
     "assets/images/diet.png",
     "assets/images/suggestion.png",
     "assets/images/fav.jpg",
-
-
+    "assets/images/signout.png",
   ];
   var pages = [
     SearchScreen(),
@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget{
     CalculatorScreen(),
     SearchScreen(),
     SearchScreen(),
-    SearchScreen(),
+    HomePageLogin()
 
   ];
   @override
