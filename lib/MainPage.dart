@@ -23,23 +23,11 @@ class _MainState extends State<MainPage> {
           title: Text("RecipeNow"),
       ),
       backgroundColor: Color(0xFFF0F0F0),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        type: BottomNavigationBarType.fixed,
-        onTap: (index){
-          setState(() {
-            _currentIndex = index;
-          });
 
-        },
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.calculate), label: "Calculator"),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        ],
+      body: Padding(
+        padding: EdgeInsets.only(top:15),
+        child: getBodyWidget(),
       ),
-      body: getBodyWidget(),
 
 
     );
