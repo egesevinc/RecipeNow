@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:se380_project/screens/Calculator.dart';
+import 'package:se380_project/screens/favorites.dart';
 import 'package:se380_project/screens/search_screen.dart';
 import 'main.dart';
 import 'package:se380_project/screens/search_ingredient_screen.dart';

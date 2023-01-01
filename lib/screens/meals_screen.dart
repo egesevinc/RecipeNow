@@ -11,6 +11,7 @@ class MealsScreen extends StatefulWidget {
   _MealsScreenState createState() => _MealsScreenState();
 }
 class _MealsScreenState extends State<MealsScreen> {
+
   _buildTotalNutrientsCard() {
     return Container(
       height: 140,
@@ -132,7 +133,9 @@ class _MealsScreenState extends State<MealsScreen> {
                         fontWeight: FontWeight.w600
                     ),
                     overflow: TextOverflow.ellipsis,
-                  )
+                  ),
+
+
                 ],
               ),
             )
