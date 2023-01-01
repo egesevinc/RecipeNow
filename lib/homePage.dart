@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:se380_project/screens/Calculator.dart';
+import 'package:se380_project/screens/CalculatorScreen.dart';
+import 'package:se380_project/screens/CalorieCalculatorScreen.dart';
 import 'package:se380_project/screens/diet_plan.dart';
 import 'package:se380_project/screens/favorites.dart';
 import 'package:se380_project/screens/random_recipe.dart';
@@ -27,7 +28,7 @@ class HomePage extends StatelessWidget{
   ];
   var pages = [
     SearchScreen(),
-    CalculatorScreen(),
+    CalorieCalculatorScreen(),
     SearchIngredient(),
     DietPlanPage(),
     RandomRecipePage(),

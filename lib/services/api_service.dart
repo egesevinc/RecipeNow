@@ -5,13 +5,15 @@ import 'package:http/http.dart' as http;
 import 'package:se380_project/models/meal_plan_model.dart';
 import 'package:se380_project/models/recipe_model.dart';
 import 'package:se380_project/models/recipe_search_result.dart';
+
+import '../models/NutritionInfo.dart';
 class APIService {
   APIService._instantiate();
 
   static final APIService instance = APIService._instantiate();
 
   final String _baseUrl = 'api.spoonacular.com';
-  static const String API_KEY = 'b3bcce46cd044befaf96683299e8a887';
+  static const String API_KEY = 'c96f02ff96bf4b15949521a9bcdc3e1c';
 
   Future<MealPlan> generateMealPlan({required int targetCalories, required String diet}) async{
     if (diet == 'None') diet='';
@@ -67,6 +69,7 @@ class APIService {
     }
 
   }
+
   Future<Recipe> fetchRecipe(String id) async {
     Map<String, String> parameters = {
       'includeNutrition': 'false',
@@ -92,8 +95,26 @@ class APIService {
   }
   // getting Future<Recipe> GetNutritions(String id) async
 
+  Future<NutritionInfo?> getNutritionInfo( {required String food}) async {
+    Map<String, String> parameters = {
+      'food': food,
+      'apiKey': API_KEY,
+    };
+    Uri uri = Uri.https(
+      _baseUrl,
+      'recipes/$food/nutritionWidget',
+      parameters,
+    );
+    Map<String, String> headers = {
+      HttpHeaders.contentTypeHeader: '.json',
+    };
 
+    final response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      Map rJson = jsonDecode(response.body);
+      NutritionInfo recipecalorie = NutritionInfo.fromJson(rJson);
+      return recipecalorie;
+    }
   }
-
-
-
+  }

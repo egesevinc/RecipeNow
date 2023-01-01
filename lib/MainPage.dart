@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:se380_project/models/CalCalc.dart';
 import 'package:se380_project/MainPage.dart';
-import 'package:se380_project/screens/Calculator.dart';
+import 'package:se380_project/screens/CalculatorScreen.dart';
+import 'package:se380_project/screens/CalorieCalculatorScreen.dart';
 import 'package:se380_project/screens/search_screen.dart';
 import 'homePage.dart';
 
@@ -34,7 +35,7 @@ class _MainState extends State<MainPage> {
   }
   getBodyWidget(){
     if(_currentIndex==0) {return HomePage(); }
-    if(_currentIndex==2) {return CalculatorScreen(); }
+    if(_currentIndex==2) {return CalorieCalculatorScreen(); }
     if(_currentIndex==1) {return SearchScreen(); }
     if(_currentIndex==3) {return HomePage(); }
 
