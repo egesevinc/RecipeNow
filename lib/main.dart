@@ -11,6 +11,8 @@ import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
 import 'utils.dart';
+import 'package:provider/provider.dart';
+import 'package:se380_project/models/recipe_model.dart';
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key,required this.onClickedSignup}) : super(key: key);
   final VoidCallback onClickedSignup;
@@ -113,15 +115,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      scaffoldMessengerKey: Utils.messengerKey,
-      navigatorKey: navigatorKey,
-      title: 'SE 380 Project',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-        fontFamily: "Montserrat"
+    return ChangeNotifierProvider(
+      create: (context) => RecipeList(),
+      child: MaterialApp(
+        scaffoldMessengerKey: Utils.messengerKey,
+        navigatorKey: navigatorKey,
+        title: 'SE 380 Project',
+        theme: ThemeData(
+          primarySwatch: Colors.indigo,
+          fontFamily: "Montserrat"
+        ),
+        home: LoginPage(),
       ),
-      home: LoginPage(),
     );
   }
 }
@@ -308,5 +313,20 @@ class _SignUpWidgetState extends State<SignUpWidget> {
       Utils.showSnackBar(e.message);
     }
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
+  }
+}
+class RecipeList extends ChangeNotifier {
+  final List<Recipe> _recipes = [];
+
+  List<Recipe> get recipes => _recipes;
+
+  void addRecipe(Recipe recipe) {
+    _recipes.add(recipe);
+    notifyListeners();
+  }
+
+  void removeRecipe(Recipe recipe) {
+    _recipes.remove(recipe);
+    notifyListeners();
   }
 }
