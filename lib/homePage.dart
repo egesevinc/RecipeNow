@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget{
     "Calorie Calculator",
     "Search by Ingredient",
     "Diet",
-    "Meal Suggestion",
+    "Random Recipe",
     "Log Out"
   ];
 

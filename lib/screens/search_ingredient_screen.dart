@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:se380_project/models/recipe_model.dart';
+import 'package:se380_project/screens/recipe_screen.dart';
 import 'package:se380_project/services/api_service.dart';
 import 'package:se380_project/models/recipe_search_result.dart';
 
@@ -54,11 +56,29 @@ class _SearchIngredientState extends State<SearchIngredient> {
                     itemCount: snapshot.data?.length,
                     itemBuilder: (context, index) {
                       Recipetest recipe = snapshot.data![index];
-                      return Container(
-                        padding: EdgeInsets.all(3),
-                        child: ListTile(
-                          title: Text(recipe.title),
-                          leading: Image.network(recipe.imageUrl),
+                      Recipe convertedRecipe = Recipe(
+                        title: recipe.title,
+                        spoonacularSourceUrl: recipe.imageUrl,
+                        // ... other properties
+                      );
+                      return GestureDetector(
+                        onTap: () {
+                          // Navigate to the recipe screen
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => RecipeScreen(
+                                recipe: convertedRecipe, mealType: 'Lunch',
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(3),
+                          child: ListTile(
+                            title: Text(recipe.title),
+                            leading: Image.network(recipe.imageUrl),
+                          ),
                         ),
                       );
                     },

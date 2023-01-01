@@ -7,7 +7,7 @@ class Recipe {
 
 Recipe({
     required this.spoonacularSourceUrl,
-   required this.title
+  required this.title
 });
 
   factory Recipe.fromMap(Map<String,dynamic> map){
