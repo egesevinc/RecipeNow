@@ -30,57 +30,59 @@ class _LoginWidgetState extends State<LoginWidget> {
     super.dispose();
   }
   @override
-  Widget build(BuildContext context) => SingleChildScrollView(
-    padding: EdgeInsets.all(16),
-    child: Center(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 100),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset("assets/images/ingredient.jpg"),
-            SizedBox(height: 40),
-            TextField(
-              controller: emailController,
-              cursorColor: Colors.white,
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(labelText: "Email")
-              ),
-              SizedBox(height: 4),
+  Widget build(BuildContext context) => Material(
+    child: SingleChildScrollView(
+      padding: EdgeInsets.all(16),
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 100),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset("assets/images/ingredient.jpg"),
+              SizedBox(height: 40),
               TextField(
-                controller: passwordController,
-                textInputAction: TextInputAction.done,
-                decoration: InputDecoration(labelText: "Password"),
-                obscureText: true,
+                controller: emailController,
+                cursorColor: Colors.white,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(labelText: "Email")
                 ),
-                SizedBox(height: 20),
-                ElevatedButton.icon(style:ElevatedButton.styleFrom(minimumSize: Size.fromHeight(50),),
-                  icon: Icon(Icons.lock_open, size: 32 ),
-                  label: Text(
-                    'Log In',
-                    style: TextStyle(fontSize: 24),
+                SizedBox(height: 4),
+                TextField(
+                  controller: passwordController,
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(labelText: "Password"),
+                  obscureText: true,
                   ),
-                  onPressed: signIn,
-                ),
-                SizedBox(height: 24,),
-                RichText(
-                text: TextSpan(
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = widget.onClickedSignup,
-                  style: TextStyle(color: Colors.indigo,fontSize: 24),
-                  text: 'No account? ',
-                  children: [
-                    TextSpan(
-                      text: 'Sign Up',
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: Theme.of(context).colorScheme.secondary,
+                  SizedBox(height: 20),
+                  ElevatedButton.icon(style:ElevatedButton.styleFrom(minimumSize: Size.fromHeight(50),),
+                    icon: Icon(Icons.lock_open, size: 32 ),
+                    label: Text(
+                      'Log In',
+                      style: TextStyle(fontSize: 24),
+                    ),
+                    onPressed: signIn,
+                  ),
+                  SizedBox(height: 24,),
+                  RichText(
+                  text: TextSpan(
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = widget.onClickedSignup,
+                    style: TextStyle(color: Colors.indigo,fontSize: 24),
+                    text: 'No account? ',
+                    children: [
+                      TextSpan(
+                        text: 'Sign Up',
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Theme.of(context).colorScheme.secondary,
+                        )
                       )
-                    )
-                  ]
-                )
-                )
-          ],
+                    ]
+                  )
+                  )
+            ],
+          ),
         ),
       ),
     ),

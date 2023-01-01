@@ -12,7 +12,6 @@ class HomePage extends StatelessWidget{
     "Search by Ingredient",
     "Diet",
     "Meal Suggestion",
-    "Favorites",
     "Log Out"
   ];
 
@@ -22,7 +21,6 @@ class HomePage extends StatelessWidget{
     "assets/images/ingred.png",
     "assets/images/diet.png",
     "assets/images/suggestion.png",
-    "assets/images/fav.jpg",
     "assets/images/signout.png",
   ];
   var pages = [
@@ -30,7 +28,6 @@ class HomePage extends StatelessWidget{
     LoginWidget(onClickedSignup: () => null),
     SearchIngredient(),
     CalculatorScreen(),
-    SearchScreen(),
     SearchScreen(),
     HomePageLogin()
 
@@ -45,24 +42,26 @@ class HomePage extends StatelessWidget{
               childAspectRatio: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height/2.6)
           ),
           itemBuilder: (BuildContext context,int index){
-            return Card(
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Image.asset(images[index] , height: 50,width: 50,),
-                  Padding(
-                    padding: EdgeInsets.all(8),
-                    child: ElevatedButton(
-                      onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> pages[index])),
-                      child: Text(services[index], style: TextStyle(fontSize: 16,fontFamily:"Montserrat",color:Colors.black,height:1.2,fontWeight: FontWeight.w600),
-                          textAlign: TextAlign.center,
+            return Material(
+              child: Card(
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 30,
                     ),
-                  ),
-                  )
+                    Image.asset(images[index] , height: 50,width: 50,),
+                    Padding(
+                      padding: EdgeInsets.all(8),
+                      child: ElevatedButton(
+                        onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> pages[index])),
+                        child: Text(services[index], style: TextStyle(fontSize: 16,fontFamily:"Montserrat",color:Colors.black,height:1.2,fontWeight: FontWeight.w600),
+                            textAlign: TextAlign.center,
+                      ),
+                    ),
+                    )
 
-                ],
+                  ],
+                ),
               ),
             );
           }
