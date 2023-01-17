@@ -95,6 +95,22 @@ class APIService {
   }
   // getting Future<Recipe> GetNutritions(String id) async
 
+  Future<Recipe> getRandomRecipe() async {
+    try {
+      Uri uri = Uri.https(_baseUrl, '/recipes/random', {'number': '1','apiKey': API_KEY});
+      Map<String, String> headers = {
+        HttpHeaders.contentTypeHeader: 'application/json',
+      };
+      var response = await http.get(uri, headers: headers);
+      var data = json.decode(response.body);
+      var recipes = data['recipes'] as List;
+      var recipeData = recipes[0];
+      Recipe recipe = Recipe.fromMap(recipeData);
+      return recipe;
+    } catch (err) {
+      throw err.toString();
+    }
+  }
   Future<NutritionInfo?> getNutritionInfo( {required String food}) async {
     Map<String, String> parameters = {
       'food': food,

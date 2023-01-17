@@ -56,7 +56,7 @@ class _SearchIngredientState extends State<SearchIngredient> {
                     itemCount: snapshot.data?.length,
                     itemBuilder: (context, index) {
                       Recipetest recipe = snapshot.data![index];
-                      Recipe convertedRecipe = Recipe(
+                      Recipe convertedRecipe = Recipe.withoutMealType(
                         title: recipe.title,
                         spoonacularSourceUrl: recipe.imageUrl,
                         // ... other properties
