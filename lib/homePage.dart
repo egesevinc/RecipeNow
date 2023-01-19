@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:se380_project/screens/BMICalculatorScreen.dart';
 import 'package:se380_project/screens/CalculatorScreen.dart';
 import 'package:se380_project/screens/CalorieCalculatorScreen.dart';
 import 'package:se380_project/screens/diet_plan.dart';
@@ -15,7 +16,8 @@ class HomePage extends StatelessWidget{
     "Search by Ingredient",
     "Diet",
     "Random Recipe",
-    "Log Out"
+    "BMI Calculator",
+    "Log Out",
   ];
 
   var images = [
@@ -24,7 +26,10 @@ class HomePage extends StatelessWidget{
     "assets/images/ingred.png",
     "assets/images/diet.png",
     "assets/images/suggestion.png",
+    "assets/images/BMI.png",
     "assets/images/signout.png",
+
+
   ];
   var pages = [
     SearchScreen(),
@@ -32,7 +37,9 @@ class HomePage extends StatelessWidget{
     SearchIngredient(),
     DietPlanPage(),
     RandomRecipePage(),
-    HomePageLogin()
+    BMICalculatorScreen(),
+    HomePageLogin(),
+
 
   ];
   @override
