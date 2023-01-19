@@ -10,7 +10,7 @@ class _BMICalculatorScreenState extends State<BMICalculatorScreen> {
   double _weight = 0;
   double _bmi = 0;
   String _bmiResult = "";
-  String _bmiImage = " ";
+  String _bmiImage = "assets/images/Normal.png";
 
   void _calculateBMI() {
     setState(() {
