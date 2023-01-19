@@ -54,6 +54,7 @@ dev_dependencies:
   firebase_core_platform_interface: 4.5.2
   email_validator: ^2.0.1
   provider: ^4.3.2+1
+  cloud_firestore: ^4.0.1
 
 
 

@@ -4,6 +4,8 @@ import 'package:se380_project/models/recipe_model.dart';
 import 'package:se380_project/screens/favorites.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 class RecipeScreen extends StatefulWidget {
   //This stateful widget page takes in String mealType and Recipe recipe
   final String mealType;
@@ -21,33 +23,38 @@ class _RecipeScreenState extends State<RecipeScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<RecipeList>(
-      builder: (context,recipeList,child){
-        bool isRecipeInFavorites =_isRecipeInFavorites(recipeList,widget.recipe);
+        builder: (context,recipeList,child){
+          bool isRecipeInFavorites =_isRecipeInFavorites(recipeList,widget.recipe);
 
-      return Scaffold(
-        //AppBar is widget.mealType
-        appBar: AppBar(
-          title: Text(widget.mealType),
-          actions: [
-        IconButton(
-        icon: isRecipeInFavorites
-            ? Icon(Icons.favorite)
-            : Icon(Icons.favorite_border),
-        color: isRecipeInFavorites
-            ? Colors.red
-            : Colors.white,
-        onPressed: () {
-          setState(() {
-            if (isRecipeInFavorites) {
-              recipeList.removeRecipe(widget.recipe);
-            } else {
-              recipeList.addRecipe(widget.recipe);
-            }
-          });
-        },
-      )
-          ],
-        ),
+          return Scaffold(
+            //AppBar is widget.mealType
+            appBar: AppBar(
+              title: Text(widget.mealType),
+              actions: [
+                IconButton(
+                  icon: isRecipeInFavorites
+                      ? Icon(Icons.favorite)
+                      : Icon(Icons.favorite_border),
+                  color: isRecipeInFavorites
+                      ? Colors.red
+                      : Colors.white,
+                  onPressed: () {
+                    setState(() {
+                      if (isRecipeInFavorites) {
+                        recipeList.removeRecipe(widget.recipe);
+                        FirebaseFirestore.instance.collection("favorites").doc(widget.recipe.title).delete();
+                      } else {
+                        recipeList.addRecipe(widget.recipe);
+                        FirebaseFirestore.instance.collection("favorites").add({
+                          "recipeId": FirebaseFirestore.instance.collection("favorites").doc().id,
+                          "title": widget.recipe.title,
+                        });
+                      }
+                    });
+                  },
+                )
+              ],
+            ),
         /**
          * Body is a Webview. Ensure you have imported webview flutter.
          *

@@ -7,6 +7,8 @@ import 'package:se380_project/models/recipe_model.dart';
 import 'package:se380_project/models/recipe_search_result.dart';
 
 import '../models/NutritionInfo.dart';
+import '../models/meal_model.dart';
+import '../models/weeklyPlan.dart';
 class APIService {
   APIService._instantiate();
 
@@ -93,7 +95,23 @@ class APIService {
       throw err.toString();
     }
   }
-  // getting Future<Recipe> GetNutritions(String id) async
+  Future<WeeklyPlan> getWeeklyPlan() async {
+    try {
+      Uri uri = Uri.https(_baseUrl, '/mealplanner/generate', {
+        'timeFrame': 'week','apiKey': API_KEY
+      });
+      Map<String, String> headers = {
+        HttpHeaders.contentTypeHeader: 'application/json',
+      };
+      var response = await http.get(uri, headers: headers);
+      print("response: ${response.body}");
+      var data = json.decode(response.body);
+      //print("data: ${data.body}");
+      return WeeklyPlan.fromMap(data);
+    } catch (err) {
+      throw err.toString();
+    }
+  }
 
   Future<Recipe> getRandomRecipe() async {
     try {
