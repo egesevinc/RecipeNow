@@ -113,9 +113,9 @@ class APIService {
     }
   }
 
-  Future<Recipe> getRandomRecipe() async {
+  Future<Recipe> getRandomRecipe(String mealType) async {
     try {
-      Uri uri = Uri.https(_baseUrl, '/recipes/random', {'number': '1','apiKey': API_KEY});
+      Uri uri = Uri.https(_baseUrl, '/recipes/random', {'number': '1','apiKey': API_KEY,'type': mealType});
       Map<String, String> headers = {
         HttpHeaders.contentTypeHeader: 'application/json',
       };

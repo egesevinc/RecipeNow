@@ -13,18 +13,19 @@ class RandomRecipePage extends StatefulWidget {
 }
 
 class _RandomRecipePageState extends State<RandomRecipePage> {
-  late Recipe _randomRecipe;
-  late String _mealType;
+  late Recipe _randomRecipe = Recipe(mealType: '', spoonacularSourceUrl: '', title: '');
+  List<String> _mealTypes = ['Breakfast', 'Lunch', 'Dinner'];
+  String _selectedMealType = 'Breakfast';
 
   @override
   void initState() {
     super.initState();
     _fetchRandomRecipe();
+
   }
 
   _fetchRandomRecipe() async {
-    _randomRecipe=Recipe(spoonacularSourceUrl: "spoonacularSourceUrl", title: "title", mealType: "mealType");
-    _randomRecipe = await ApiService.APIService.instance.getRandomRecipe();
+    _randomRecipe = await ApiService.APIService.instance.getRandomRecipe(_selectedMealType);
     setState(() {});
   }
 
@@ -55,12 +56,27 @@ class _RandomRecipePageState extends State<RandomRecipePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 ListTile(
-                  leading: Icon(Icons.fastfood),
+                  leading: Image.asset('assets/images/Fast-Food-image.png', width: 60, height: 60),
                   title: Text(_randomRecipe.title),
-                  subtitle: Text(_randomRecipe.spoonacularSourceUrl),
                 ),
                 SizedBox(
                   height: 20,
+                ),
+
+                DropdownButton<String>(
+                  value: _selectedMealType,
+                  items: _mealTypes.map((String value) {
+                    return new DropdownMenuItem<String>(
+                      value: value,
+                      child: new Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _selectedMealType = newValue!;
+                    });
+                    _fetchRandomRecipe();
+                  },
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -69,13 +85,13 @@ class _RandomRecipePageState extends State<RandomRecipePage> {
                       MaterialPageRoute(
                         builder: (context) => RecipeScreen(
                           recipe: _randomRecipe,
-                          mealType: 'Breakfast', //example value
+                          mealType: _selectedMealType,
                         ),
                       ),
                     );
                   },
                   child: Text("View Recipe"),
-                )
+                ),
               ],
             ),
           ),

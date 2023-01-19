@@ -95,7 +95,7 @@ class _DietPlanPageState extends State<DietPlanPage> {
                           ...(_weeklyPlan[day]!['meals'] as List<Meal>).map((meal) => Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                             child: ListTile(
-                              leading: Icon(Icons.fastfood),
+                              leading: Image.asset('assets/images/meal-food-image.png', width: 60, height: 60),
                               title: Text(meal.title),
                               subtitle: Text(meal.id.toString()),
                             ),
