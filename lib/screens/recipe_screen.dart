@@ -15,7 +15,7 @@ class RecipeScreen extends StatefulWidget {
   _RecipeScreenState createState() => _RecipeScreenState();
 }
 class _RecipeScreenState extends State<RecipeScreen> {
-
+  late String _documentId;
   bool _isRecipeInFavorites(RecipeList recipeList,Recipe recipe) {
     return recipeList.recipes.contains(recipe);
   }
@@ -42,12 +42,13 @@ class _RecipeScreenState extends State<RecipeScreen> {
                     setState(() {
                       if (isRecipeInFavorites) {
                         recipeList.removeRecipe(widget.recipe);
-                        FirebaseFirestore.instance.collection("favorites").doc(widget.recipe.title).delete();
+                        FirebaseFirestore.instance.collection("favorites").doc(_documentId).delete();
                       } else {
                         recipeList.addRecipe(widget.recipe);
-                        FirebaseFirestore.instance.collection("favorites").add({
-                          "recipeId": FirebaseFirestore.instance.collection("favorites").doc().id,
-                          "title": widget.recipe.title,
+                        var docRef = FirebaseFirestore.instance.collection("favorites").doc();
+                        _documentId = docRef.id;
+                        docRef.set({
+                          "title": widget.recipe.title
                         });
                       }
                     });
@@ -75,7 +76,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
             ),
           ],
           onTap: (index){
-            Navigator.push(context, MaterialPageRoute(builder: (_) => FavoritesScreen(favoriteRecipes: recipeList.recipes)));
+            Navigator.push(context, MaterialPageRoute(builder: (_) => FavoritesScreen()));
           },
         ),
       );
