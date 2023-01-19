@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:se380_project/MainPage.dart';
 import 'package:se380_project/main.dart';
 import 'package:se380_project/models/recipe_model.dart';
 import 'package:se380_project/screens/favorites.dart';
@@ -6,6 +7,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../homePage.dart';
 class RecipeScreen extends StatefulWidget {
   //This stateful widget page takes in String mealType and Recipe recipe
   final String mealType;
@@ -71,12 +74,19 @@ class _RecipeScreenState extends State<RecipeScreen> {
           items: const[
             BottomNavigationBarItem(icon: Icon(Icons.favorite),label: 'Favorites'),
             BottomNavigationBarItem(
-              icon: Icon(Icons.web),
-              label: 'WebView',
+              icon: Icon(Icons.home),
+              label: 'Home',
             ),
           ],
           onTap: (index){
-            Navigator.push(context, MaterialPageRoute(builder: (_) => FavoritesScreen()));
+            switch (index) {
+              case 0:
+                Navigator.push(context, MaterialPageRoute(builder: (_) => FavoritesScreen()));
+                break;
+              case 1:
+                Navigator.push(context, MaterialPageRoute(builder: (_) => MainPage()));
+                break;
+            }
           },
         ),
       );
